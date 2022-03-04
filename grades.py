@@ -1,7 +1,7 @@
 import math
 
 
-def percent_to_grade(marks, *, suffix = False, round = False):
+def percent_to_grade(marks, *, suffix=False, round=False):
     if round:
         marks = normal_round(marks)
     match marks:
@@ -21,7 +21,7 @@ def check_suffix(marks, grade, suffix):
     if suffix:
         match marks:
             case num if num == 100:
-                 return 'A+'
+                return 'A+'
             case num if num % 10 < 3:
                 return grade + '-'
             case num if num % 10 < 7:
@@ -71,13 +71,33 @@ def normal_round(n):
     return math.ceil(n)
 
 
+# Better Solution
+def calculate_gpa2(grades):
+    gpas = {
+        'A+': 4.33,
+        'A': 4.00,
+        'A-': 3.67,
+        'B+': 3.33,
+        'B': 3.00,
+        'B-': 2.67,
+        'C+': 2.33,
+        'C': 2.00,
+        'C-': 1.67,
+        'D+': 1.33,
+        'D': 1.00,
+        'D-': 0.67,
+        'F': 0.00,
+    }
+    return sum(gpas[g] for g in grades) / len(grades)
+
+
 percent_to_grade(69.4, round=True)
 percent_to_grade(69.6, round=True)
 percent_to_grade(72.5, suffix=True, round=True)
 percent_to_grade(89.6, suffix=True, round=True)
 
-calculate_gpa(['D+', 'C', 'A-', 'B'])
-calculate_gpa(['B+', 'A', 'C+', 'F'])
+calculate_gpa2(['D+', 'C', 'A-', 'B'])
+calculate_gpa2(['B+', 'A', 'C+', 'F'])
 
 
 
