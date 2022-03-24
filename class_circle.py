@@ -16,9 +16,15 @@ class Circle:
     def __repr__(self):
         return f"Circle({self.radius})"
 
+    # as @property diameter is able to change when radius changes
     @property
     def diameter(self):
         return self.radius * 2
+
+    # Bonus 2 - Didn't complete
+    # @diameter.setter
+    # def diameter(self, diameter):
+    #     self.radius = diameter / 2
 
     @property
     def area(self):
@@ -27,6 +33,7 @@ class Circle:
 
 c = Circle(5)
 print(c.radius)
+c.diameter = 6
 print(c.diameter)
 print(c.area)
 
