@@ -4,19 +4,31 @@ from datetime import date
 
 class NextDate:
 
-    def __init__(self, day):
+    def __init__(self, day, *, after_today=False):
         self.day = day
+        self.after_today = after_today
 
     def days_until(self):
-        print((self.day - date.today().weekday()) % 7)
-        return (self.day - date.today().weekday()) % 7
+        if self.after_today:
+            print(self.day - date.today().weekday() % 7 if 0 else 7)
+            return self.day - date.today().weekday() % 7 if 0 else 7
+        else:
+            print((self.day - date.today().weekday()) % 7)
+            return (self.day - date.today().weekday()) % 7
 
     def date(self):
-        print(date.today() + datetime.timedelta(self.days_until()))
-        return date.today() + datetime.timedelta(self.days_until())
+        if self.after_today:
+            print(date.today() + datetime.timedelta(self.days_until()))
+            return date.today() + datetime.timedelta(self.days_until())
+        else:
+            print(date.today() + datetime.timedelta(self.days_until()))
+            return date.today() + datetime.timedelta(self.days_until())
 
     def __repr__(self):
-        return f"NextDate(Weekday.{self.day})"
+        if self.after_today:
+            return f"NextDate(Weekday.{self.day}2)"
+        else:
+            return f"NextDate(Weekday.{self.day})"
 
 
 class Weekday:
@@ -29,9 +41,14 @@ class Weekday:
     SUNDAY = 6
 
 
-print(date.today())
-print(date(1999, 12, 31))
+# print(date.today())
 next_thursday = NextDate(Weekday.THURSDAY)
 next_thursday.days_until()
 next_thursday.date()
+next_friday = NextDate(Weekday.FRIDAY)
+next_friday.days_until()
+next_friday.date()
+next_friday = NextDate(Weekday.THURSDAY, after_today=True)
+next_friday.days_until()
+next_friday.date()
 
