@@ -17,12 +17,8 @@ class NextDate:
             return (self.day - date.today().weekday()) % 7
 
     def date(self):
-        if self.after_today:
-            print(date.today() + datetime.timedelta(self.days_until()))
-            return date.today() + datetime.timedelta(self.days_until())
-        else:
-            print(date.today() + datetime.timedelta(self.days_until()))
-            return date.today() + datetime.timedelta(self.days_until())
+        print(date.today() + datetime.timedelta(self.days_until()))
+        return date.today() + datetime.timedelta(self.days_until())
 
     def __repr__(self):
         if self.after_today:
@@ -41,14 +37,48 @@ class Weekday:
     SUNDAY = 6
 
 
-# print(date.today())
-next_thursday = NextDate(Weekday.THURSDAY)
-next_thursday.days_until()
-next_thursday.date()
-next_friday = NextDate(Weekday.FRIDAY)
-next_friday.days_until()
-next_friday.date()
-next_friday = NextDate(Weekday.THURSDAY, after_today=True)
-next_friday.days_until()
-next_friday.date()
+def next_date(day, after_today=False):
+    print(date.today() + datetime.timedelta(days_until(day, after_today)))
+
+
+def days_until(day, after_today=False):
+    if after_today:
+        print(day - date.today().weekday() % 7 if 0 else 7)
+        return day - date.today().weekday() % 7 if 0 else 7
+    else:
+        print((day - date.today().weekday()) % 7)
+        return (day - date.today().weekday()) % 7
+
+
+def next_tuesday(after_today=False):
+    print(date.today() + datetime.timedelta(days_to_tuesday(after_today)))
+
+
+def days_to_tuesday(after_today=False):
+    if after_today:
+        print(Weekday.TUESDAY - date.today().weekday())
+        print(Weekday.TUESDAY - date.today().weekday() % 7 if 0 else 7)
+        return Weekday.TUESDAY - date.today().weekday() % 7 if 0 else 7
+    else:
+        print((Weekday.TUESDAY - date.today().weekday()) % 7)
+        return (Weekday.TUESDAY - date.today().weekday()) % 7
+
+
+# next_thursday = NextDate(Weekday.THURSDAY)
+# next_thursday.days_until()
+# next_thursday.date()
+# next_friday = NextDate(Weekday.FRIDAY)
+# next_friday.days_until()
+# next_friday.date()
+# next_friday = NextDate(Weekday.THURSDAY, after_today=True)
+# next_friday.days_until()
+# next_friday.date()
+
+# Bonus 3
+# next_date(Weekday.FRIDAY)
+# days_until(Weekday.FRIDAY)
+next_tuesday(after_today=True)
+days_to_tuesday()
+
+
 
