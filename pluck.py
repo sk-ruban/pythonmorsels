@@ -1,38 +1,30 @@
-def pluck(data, *path, sep=".", default='default'):
-    paths = path
+def pluck(input, *paths, sep=".", default=False):
+    # Trey - Better to use a list and append, convert to tuple later as less awkward
     values = ()
-    for each in paths:
-        items = (each.split(sep))
-        plucked = data
+    for path in paths:
+        items = path.split(sep)
+        data = input
         for item in items:
             try:
-                plucked = plucked[item]
+                data = data[item]
             except:
-                if default == 'default':
+                if default is False:
                     raise KeyError
                 else:
-                    values += (default,)
-        values += (plucked,)
-    if len(values) == 1:
-        print(values[0])
+                    data = default
+        # Trey - values.append(data)
+        values += (data,)
+    if len(paths) == 1:
         return values[0]
     else:
-        print(values)
+        # Trey - return tuple(values)
         return values
 
 
 data = {'amount': 10.64, 'category': {'name': 'Music', 'group': 'Fun'}}
 pluck(data, 'amount')
 pluck(data, 'category.group')
-pluck(data, 'category/name', sep='/')
-pluck(data, 'category.created', default='N/A')
-pluck(data, 'category.name', 'amount')
-
 d = {'a': {'b': 5, 'z': 20}, 'c': {'d': 3}, 'x': 40}
-pluck(d, 'x')
 pluck(d, 'a.b')
-pluck(d, 'a.b', 'c.e', 'c.d', 'x', default=None)
-
-data = {'amount': 10.64, 'category': {'name': 'Music', 'group': 'Fun'}}
 pluck(data, 'category.name', 'amount')
 pluck(d, 'a.b', 'c.e', 'c.d', 'x', default=None)
