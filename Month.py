@@ -3,16 +3,21 @@ import calendar
 from datetime import date
 
 
+# Dataclass provides boilerplate for easy __init__, equality etc.
 # order allows for instance comparison
-# frozen allows for instance immutability
+# frozen allows for instance immutability -> also free hash values
 @dataclass(order=True, frozen=True)
 class Month:
     # __slots__ explicitly state which instance attributes you expect your object instances to have
-    # Allows for space savings!
+    # allows for space savings!
     __slots__ = ('year', 'month')
     year: int
     month: int
 
+    def __str__(self):
+        return f"{self.year}-{format(self.month, '02d')}"
+
+    # @property allows for calculation each time they are called
     @property
     def first_day(self):
         return date(self.year, self.month, 1)
@@ -21,9 +26,6 @@ class Month:
     def last_day(self):
         first, last = calendar.monthrange(self.year, self.month)
         return date(self.year, self.month, last)
-
-    def __str__(self):
-        return f"{self.year}-{format(self.month, '02d')}"
 
     @classmethod
     def from_date(cls, date):
