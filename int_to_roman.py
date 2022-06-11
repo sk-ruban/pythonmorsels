@@ -47,9 +47,9 @@ int_to_roman(4)
 int_to_roman(9)
 
 # Bonus 2
-# roman_to_int('I')
-# roman_to_int('MDCCLXXXVI')
-# roman_to_int("XVA")
+roman_to_int('I')
+roman_to_int('MDCCLXXXVI')
+roman_to_int("XVA")
 
 # Bonus 3
 roman_to_int('IV')
