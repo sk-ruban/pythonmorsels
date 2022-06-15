@@ -2,8 +2,9 @@ class EasyDict:
 
     """Accepts a Dict and creates an instance which can work with key & attribute lookups"""
 
-    # Use **kwargs for accepting optional key-word arguments
+    # Use **kwargs for accepting optional key-word arguments (**)
     def __init__(self, input_dict = {}, **kwargs):
+        # Store variables with self.__dict__.update()
         self.__dict__.update(input_dict)
         self.__dict__.update(kwargs)
 
@@ -15,23 +16,27 @@ class EasyDict:
     def __setitem__(self, key, value):
         self.__dict__[key] = value
 
-    '''
-    # Trey's Solution
-    # To Test for equality
+    # Testing for Equality
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
 
-    # Does the same thing as __getitem__, except it provides a default value
     def get(self, key, default=None):
         return getattr(self, key, default)
-    '''
 
 
-person = EasyDict({'name': "Trey Hunner", 'location': "San Diego"})
+# Base Problem
+person = EasyDict({'name': "Ruban", 'location': "Singapore"})
 print(person.name)
 print(person['location'])
-person.location = "Portland"
+
+# Bonus 1 - Key & Attribute Assignment
+person.location = "Gran Canaria"
 print(person['location'])
 
-person = EasyDict(name="Trey Hunner", location="San Diego")
+# Bonus 2 - Accept Keyword Arguments
+person = EasyDict(name="Ruban", location="Singapore")
 print(person.location)
+print(person == EasyDict(name="Bob", location="Singapore"))
+print(person == EasyDict(name="Ruban", location="Singapore"))
+print(person.get('profession'))
+print(person.get('profession', 'unknown'))
