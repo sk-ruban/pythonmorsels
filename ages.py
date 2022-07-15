@@ -1,9 +1,24 @@
 from datetime import datetime
 
 '''
-from dateutil.relativedelta import relativedelta
+# Trey's Solution
 
+def is_over(age, date_string):
+    year, month, day = (int(s) for s in date_string.split('-'))
+    today = date.today()
+    return (year, month, day) <= (today.year - age, today.month, today.day)
+    
+def get_age(date_string):
+    born = datetime.strptime(date_string, '%Y-%m-%d')
+    today = datetime.now()
+    shift = (today.month, today.day) < (born.month, born.day)
+    return today.year - born.year - shift
+'''
+
+'''
 # Unable to use relativedelta as PythonMorsels does not accept dateutil
+
+from dateutil.relativedelta import relativedelta
 
 def is_over(limit, birthday):
 
