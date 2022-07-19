@@ -1,15 +1,14 @@
-import re
-
 def natural_key(text):
     return text.casefold()
 
 
 def natural_sort(data, key=natural_key, reverse=False):
-    print(sorted(data, key=key, reverse=reverse))
+    # print(sorted(data, key=key, reverse=reverse))
     return sorted(data, key=key, reverse=reverse)
 
 '''
 # Trey's Solution
+import re
 
 def natural_key(string):
     """Return case-normalized sorting key with numbers as integers."""
